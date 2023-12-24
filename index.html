@@ -1,0 +1,120 @@
+<!--
+  新型文本加密算法 STEM项目
+  2023年12月20日15:29完工
+  作者：袁正阳，夏肖旭，李鑫桐
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>加密算法</title>
+    <style>
+      body {
+        margin: 20px;
+        background-color: lightblue;
+      }
+      h1 {
+        text-align: center;
+      }
+      label {
+        font-weight: bold;
+      }
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: none;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #result {
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>新型加密算法</h1>
+
+    <label for="key">秘钥（必须为数字）：</label>
+    <input type="text" id="key" placeholder="输入秘钥(留空自动生成)" /><br /><br />
+
+    <label for="text">文本：</label>
+    <textarea
+      id="text"
+      rows="4"
+      cols="50"
+      placeholder="输入要加密/解密的文本"
+    ></textarea
+    ><br /><br />
+
+    <button onclick="encrypt()">加密</button>
+    <button onclick="decrypt()">解密</button><br /><br />
+
+    <label for="result">结果：</label>
+    <textarea id="result" rows="4" cols="50" readonly></textarea>
+
+    <button onclick="copyToClipboard()">复制结果</button><br /><br />
+
+    <hr>
+    <p>
+      <b>新型文本加密算法 STEM项目</b> <br>
+      制作者：袁正阳，夏肖旭，李鑫桐 
+      
+    </p>
+
+    <script>
+
+      // 加密
+      function encrypt() {
+        var key = parseInt(document.getElementById("key").value);
+        var text = document.getElementById("text").value;
+        text.split('').reverse().join('')
+
+        var encryptedText = "";
+        for (let i = 0; i < text.length; i++) {
+          let charCode = text.charCodeAt(i);
+          let encryptedCharCode = charCode + key;
+          let encryptedChar = String.fromCharCode(encryptedCharCode);
+          encryptedText += encryptedChar;
+        }
+
+
+        document.getElementById("result").value = encryptedText;
+      }
+
+      // 解密
+      function decrypt() {
+        var key = parseInt(document.getElementById("key").value);
+        var text = document.getElementById("text").value;
+
+        var decryptedText = "";
+        for (let i = 0; i < text.length; i++) {
+          let charCode = text.charCodeAt(i);
+          let decryptedCharCode = charCode - key;
+          let decryptedChar = String.fromCharCode(decryptedCharCode);
+          decryptedText += decryptedChar;
+        }
+
+        decryptedText.split('').reverse().join('') // 反转字符串的字符
+        document.getElementById("result").value = decryptedText;
+      }
+
+      function copyToClipboard() {
+        var resultInput = document.getElementById("result");
+        resultInput.select();
+        resultInput.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("结果已复制到剪贴板！");
+      }
+    </script>
+  </body>
+</html>
