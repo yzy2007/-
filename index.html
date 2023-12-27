@@ -42,10 +42,10 @@
     </style>
   </head>
   <body>
-    <h1>新型加密算法</h1>
+    <h1>新型文本加密算法</h1>
 
-    <label for="key">秘钥（必须为数字）：</label>
-    <input type="text" id="key" placeholder="[必须]输入秘钥" /><br /><br />
+    <label for="key">秘钥（必须为整数）：</label>
+    <input type="text" id="key" placeholder="输入秘钥" /><br /><br />
 
     <label for="text">文本：</label>
     <textarea
@@ -64,29 +64,30 @@
 
     <button onclick="copyToClipboard()">复制结果</button><br /><br />
 
-    <hr>
+    <hr />
     <p>
-      <b>新型文本加密算法 STEM项目</b> <br>
-      制作者：袁正阳，夏肖旭，李鑫桐 
-      
+      <b>新型文本加密算法 STEM项目</b> <br />
+      制作者：袁正阳，夏肖旭，李鑫桐
     </p>
 
     <script>
+      function calc(key) {
+        return key * 2 - 10;
+      }
 
       // 加密
       function encrypt() {
         var key = parseInt(document.getElementById("key").value);
         var text = document.getElementById("text").value;
-        text.split('').reverse().join('')
+        text.split("").reverse().join("");
 
         var encryptedText = "";
         for (let i = 0; i < text.length; i++) {
           let charCode = text.charCodeAt(i);
-          let encryptedCharCode = charCode + key;
+          let encryptedCharCode = charCode + calc(key);
           let encryptedChar = String.fromCharCode(encryptedCharCode);
           encryptedText += encryptedChar;
         }
-
 
         document.getElementById("result").value = encryptedText;
       }
@@ -99,12 +100,12 @@
         var decryptedText = "";
         for (let i = 0; i < text.length; i++) {
           let charCode = text.charCodeAt(i);
-          let decryptedCharCode = charCode - key;
+          let decryptedCharCode = charCode - calc(key);
           let decryptedChar = String.fromCharCode(decryptedCharCode);
           decryptedText += decryptedChar;
         }
 
-        decryptedText.split('').reverse().join('') // 反转字符串的字符
+        decryptedText.split("").reverse().join(""); // 反转字符串的字符
         document.getElementById("result").value = decryptedText;
       }
 
